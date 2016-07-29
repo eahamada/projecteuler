@@ -1,3 +1,4 @@
+package main
 import "fmt"
 
 func isMult(a, b int) bool {
