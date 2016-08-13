@@ -45,7 +45,30 @@ func sumOfPrimes(n int) (sum int64) {
 }
 func euler10(n int) int64 {
 	return sumOfPrimes(n)
+	// return sieve(n)
 }
+
+func sieve(n int) (sum int64) {
+	if n > 1 {
+		sum = 2
+		sievebound := (n - 1) / 2
+		sieve := make([]bool, sievebound)
+		for i := 1; 2*i*i+1 < n; i++ {
+			if !sieve[i-1] {
+				for j := 2*(i+1)*i ; j <= sievebound; j += 2*i + 1 {
+					sieve[j-1] = true
+				}
+			}
+		}
+		for i, value := range sieve {
+			if !value {
+				sum += int64(2*(i+1) + 1)
+			}
+		}
+	}
+	return sum
+}
+
 
 func main() {
 	fmt.Println(euler10(2000000))
